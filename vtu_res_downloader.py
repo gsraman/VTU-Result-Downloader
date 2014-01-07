@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-from subprocess import call
 import re
 import urllib2
 import xlwt
