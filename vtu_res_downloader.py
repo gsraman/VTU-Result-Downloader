@@ -25,12 +25,7 @@ def parser(usn):
 	data = data_read.read()
 	rxp1 = re.findall(r'<table>(.*?)</table>',data,re.DOTALL)
 	if len(rxp1) == 0:
-			print 'No Result!!'
-			sheet.write(i,0,'NILL')
-			sheet.write(i,1,usn)
-			sheet.write(i,2,'NILL')
-			sheet.write(i,3,'NILL')
-			workbook.save(path+'/'+clg_name+'_'+branch+'.xls')
+			pass
 	else:
 			rxp2 = re.findall(r'<B>(.*?)</B>',data,re.DOTALL)
 			rxp3 = re.findall(r'<td>(.*?)</td>',rxp1[2],re.DOTALL)
@@ -41,9 +36,11 @@ def parser(usn):
 			name = nm[0]
 			if res_lst_1[0] == 'FAIL':
 				print name,'\t',0
+				rxp5 = re.findall(r'<td>(.*?)</td>',rxp1[-1],re.DOTALL)
+				total_marks1 = rxp5[-1].strip(' &nbsp;&nbsp;&nbsp; ')
 				sheet.write(i,0,name)
 				sheet.write(i,1,usn)
-				sheet.write(i,2,0)
+				sheet.write(i,2,int(total_marks1))
 				sheet.write(i,3,'FAIL')
 				workbook.save(path+'/'+clg_name+'_'+branch+'.xls')
 			elif len(rxp3) == 0:
